@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-const Version = "0.0.1"
+const Version = "0.0.2"
 
 func PrintInfo() {
 	fmt.Printf("\ngit backport :: v%s\n\n", Version)
@@ -14,5 +17,9 @@ func PrintInfo() {
 }
 
 func main()  {
-	PrintInfo()
+	args := os.Args
+
+	if len(args) < 2 {
+		PrintInfo()
+	}
 }
