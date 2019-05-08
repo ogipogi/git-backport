@@ -3,9 +3,25 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
-const Version = "0.0.2"
+const Version = "0.0.3"
+
+type backportop struct {
+	hash string
+	branches []string
+}
+
+func main()  {
+	args := os.Args
+
+	if len(args) < 2 {
+		PrintInfo()
+	}
+
+	GetHashAndBranches(args[1])
+}
 
 func PrintInfo() {
 	fmt.Printf("\ngit backport :: v%s\n\n", Version)
@@ -16,10 +32,10 @@ func PrintInfo() {
 	fmt.Printf("<<<<<\n\n")
 }
 
-func main()  {
-	args := os.Args
+func GetHashAndBranches(input string) backportop {
+	command := strings.Split(input, ":")
+	hash := command[0]
+	branches := strings.Split(command[1], ",")
 
-	if len(args) < 2 {
-		PrintInfo()
-	}
+	return backportop{hash, branches}
 }
