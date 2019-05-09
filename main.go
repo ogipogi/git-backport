@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"os/exec"
 )
 
 const Version = "0.0.4"
@@ -15,6 +16,10 @@ type BackportOp struct {
 
 func main()  {
 	args := os.Args
+	var (
+		cmdOut []byte
+		err    error
+	)
 
 	if len(args) < 2 {
 		PrintManual()
@@ -28,6 +33,15 @@ func main()  {
 		PrintManual()
 		return
 	}
+
+	cmdName := "git"
+	cmdArgs := []string{"branch", "-a"}
+	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	fmt.Println(string(cmdOut))
 }
 
 func PrintManual() {
