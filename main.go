@@ -19,6 +19,7 @@ func main()  {
 	var (
 		cmdOut []byte
 		err    error
+		gitBranches []string
 	)
 
 	if len(args) < 2 {
@@ -38,10 +39,19 @@ func main()  {
 	cmdArgs := []string{"branch", "-a"}
 	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
+		PrintManual()
 		os.Exit(1)
 	}
 
-	fmt.Println(string(cmdOut))
+	branches := strings.Split(string(cmdOut), "\n")
+	for _, element := range branches {
+		fmt.Println(">>",element)
+		branch := strings.Replace(element, "*", "", 1)
+		branch = strings.Replace(branch, "remotes/origin/", "", 1)
+		gitBranches = append(gitBranches, branch)
+	}
+
+	fmt.Println(gitBranches)
 }
 
 func PrintManual() {
