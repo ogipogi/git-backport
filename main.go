@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-const Version = "0.0.4"
+const Version = "0.0.5"
 
 type BackportOp struct {
 	hash string
@@ -43,15 +43,19 @@ func main()  {
 		os.Exit(1)
 	}
 
-	branches := strings.Split(string(cmdOut), "\n")
+	branches := strings.Split(strings.TrimSpace(string(cmdOut)), "\n")
 	for _, element := range branches {
 		fmt.Println(">>",element)
 		branch := strings.Replace(element, "*", "", 1)
 		branch = strings.Replace(branch, "remotes/origin/", "", 1)
-		gitBranches = append(gitBranches, branch)
+		gitBranches = append(gitBranches, strings.TrimSpace(branch))
 	}
 
 	fmt.Println(gitBranches)
+	for _, branch := range backportInfo.branches {
+		fmt.Println(branch, BranchInBranchesSlice(branch, branches))
+	}
+
 }
 
 func PrintManual() {
@@ -69,4 +73,13 @@ func GetHashAndBranches(input string) BackportOp {
 	branches := strings.Split(command[1], ",")
 
 	return BackportOp{hash, branches}
+}
+
+func BranchInBranchesSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
