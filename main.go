@@ -45,17 +45,19 @@ func main()  {
 
 	branches := strings.Split(strings.TrimSpace(string(cmdOut)), "\n")
 	for _, element := range branches {
-		fmt.Println(">>",element)
 		branch := strings.Replace(element, "*", "", 1)
 		branch = strings.Replace(branch, "remotes/origin/", "", 1)
 		gitBranches = append(gitBranches, strings.TrimSpace(branch))
 	}
 
-	fmt.Println(gitBranches)
 	for _, branch := range backportInfo.branches {
-		fmt.Println(branch, BranchInBranchesSlice(branch, branches))
+		exists := BranchInBranchesSlice(branch, branches)
+		if !exists {
+			fmt.Fprintln(os.Stderr, "Error: could not find branch with name", branch)
+			PrintManual()
+			return
+		}
 	}
-
 }
 
 func PrintManual() {
