@@ -51,7 +51,8 @@ func main()  {
 	}
 
 	for _, branch := range backportInfo.branches {
-		exists := BranchInBranchesSlice(branch, branches)
+		exists := BranchInBranchesSlice(strings.TrimSpace(branch), gitBranches)
+		fmt.Println(branch, exists)
 		if !exists {
 			fmt.Fprintln(os.Stderr, "Error: could not find branch with name", branch)
 			PrintManual()

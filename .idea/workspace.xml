@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e328c8cb-ce6c-4f54-b4fb-92b6ded9be18" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +16,8 @@
       <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+            <state relative-caret-position="268">
+              <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -26,17 +25,8 @@
       <file leaf-file-name="strings.go" pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/strings/strings.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11820">
-              <caret line="788" column="5" selection-start-line="788" selection-start-column="5" selection-end-line="788" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="372">
+              <caret line="813" selection-start-line="813" selection-end-line="813" />
             </state>
           </provider>
         </entry>
@@ -122,6 +112,7 @@
       <module name="git-backport" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
+      <parameters value="c972b462d82aa69ee6876fae7d865b9b58e26abe:branch_1,branch_2,branch_3" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/main.go" />
       <package value="github.com/git-backport" />
@@ -189,7 +180,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39973262" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -207,8 +198,31 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
     </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>backportInfo.branches</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.go">
@@ -257,17 +271,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/sync/pool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/fmt/print.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/strings/strings.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11820">
-          <caret line="788" column="5" selection-start-line="788" selection-start-column="5" selection-end-line="788" selection-end-column="5" />
+        <state relative-caret-position="372">
+          <caret line="813" selection-start-line="813" selection-end-line="813" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="55" column="38" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+        <state relative-caret-position="268">
+          <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
         </state>
       </provider>
     </entry>
