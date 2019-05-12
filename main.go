@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-const Version = "0.0.5"
+const Version = "0.0.6"
 
 type BackportOp struct {
 	hash string
@@ -50,13 +50,17 @@ func main()  {
 		gitBranches = append(gitBranches, strings.TrimSpace(branch))
 	}
 
-	for _, branch := range backportInfo.branches {
+	CheckIfBranchesExist(backportInfo.branches, gitBranches)
+}
+
+func CheckIfBranchesExist(branches []string, gitBranches []string) {
+	for _, branch := range branches {
 		exists := BranchInBranchesSlice(strings.TrimSpace(branch), gitBranches)
 		fmt.Println(branch, exists)
 		if !exists {
 			fmt.Fprintln(os.Stderr, "Error: could not find branch with name", branch)
 			PrintManual()
-			return
+			os.Exit(1)
 		}
 	}
 }
