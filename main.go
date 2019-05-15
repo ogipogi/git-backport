@@ -7,16 +7,15 @@ import (
 	"os/exec"
 )
 
-const Version = "0.0.7"
+const Version = "0.0.8"
 
-type BackportOp struct {
+type BackportOperation struct {
 	hash string
 	branches []string
 }
 
 func main()  {
 	args := os.Args
-	var gitBranches []string
 
 	if len(args) < 2 {
 		PrintManual()
@@ -32,13 +31,8 @@ func main()  {
 	}
 
 	branches := GetBranches()
-	for _, element := range branches {
-		branch := strings.Replace(element, "*", "", 1)
-		branch = strings.Replace(branch, "remotes/origin/", "", 1)
-		gitBranches = append(gitBranches, strings.TrimSpace(branch))
-	}
-
-	CheckIfBranchesExist(backportInfo.branches, gitBranches)
+	parsedBranches := ParseBranches(branches)
+	CheckIfBranchesExist(backportInfo.branches, parsedBranches)
 }
 
 func PrintManual() {
@@ -68,6 +62,18 @@ func GetBranches() []string {
 	return strings.Split(strings.TrimSpace(string(cmdOut)), "\n")
 }
 
+func ParseBranches(branches []string) []string {
+	var gitBranches []string
+
+	for _, element := range branches {
+		branch := strings.Replace(element, "*", "", 1)
+		branch = strings.Replace(branch, "remotes/origin/", "", 1)
+		gitBranches = append(gitBranches, strings.TrimSpace(branch))
+	}
+
+	return gitBranches
+}
+
 func CheckIfBranchesExist(branches []string, gitBranches []string) {
 	for _, branch := range branches {
 		exists := BranchInBranchesSlice(strings.TrimSpace(branch), gitBranches)
@@ -80,12 +86,12 @@ func CheckIfBranchesExist(branches []string, gitBranches []string) {
 	}
 }
 
-func GetHashAndBranches(input string) BackportOp {
+func GetHashAndBranches(input string) BackportOperation {
 	command := strings.Split(input, ":")
 	hash := command[0]
 	branches := strings.Split(command[1], ",")
 
-	return BackportOp{hash, branches}
+	return BackportOperation{hash, branches}
 }
 
 func BranchInBranchesSlice(a string, list []string) bool {
