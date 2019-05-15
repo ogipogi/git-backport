@@ -18,3 +18,4 @@ clean:
 	rm -f $(BINARY_UNIX)
 fmt:
 	$(GOFMT) -s -w main.go
+	$(GOFMT) -s -w backport_test.go
