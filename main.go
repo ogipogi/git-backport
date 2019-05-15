@@ -3,18 +3,18 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	"os/exec"
+	"strings"
 )
 
-const Version = "0.0.8"
+const Version = "0.0.9"
 
 type BackportOperation struct {
-	hash string
+	hash     string
 	branches []string
 }
 
-func main()  {
+func main() {
 	args := os.Args
 
 	if len(args) < 2 {
@@ -44,10 +44,18 @@ func PrintManual() {
 	fmt.Printf("<<<<<\n\n")
 }
 
+func GetHashAndBranches(input string) BackportOperation {
+	command := strings.Split(input, ":")
+	hash := command[0]
+	branches := strings.Split(command[1], ",")
+
+	return BackportOperation{hash, branches}
+}
+
 func GetBranches() []string {
 	var (
 		cmdOut []byte
-		err error
+		err    error
 	)
 
 	cmdOp := "git"
@@ -74,6 +82,15 @@ func ParseBranches(branches []string) []string {
 	return gitBranches
 }
 
+func BranchInBranchesSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
 func CheckIfBranchesExist(branches []string, gitBranches []string) {
 	for _, branch := range branches {
 		exists := BranchInBranchesSlice(strings.TrimSpace(branch), gitBranches)
@@ -84,21 +101,4 @@ func CheckIfBranchesExist(branches []string, gitBranches []string) {
 			os.Exit(1)
 		}
 	}
-}
-
-func GetHashAndBranches(input string) BackportOperation {
-	command := strings.Split(input, ":")
-	hash := command[0]
-	branches := strings.Split(command[1], ",")
-
-	return BackportOperation{hash, branches}
-}
-
-func BranchInBranchesSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
 }
