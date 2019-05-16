@@ -4,7 +4,7 @@ git backport
 
 Need to go back to the future?
 
-``git backport`` will help can easily backport commits in time to other release branches.
+``git backport`` is a git plugin that will help backport commits in time to other release branches.
 
 Installing
 **********************
