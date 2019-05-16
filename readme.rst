@@ -9,7 +9,8 @@ Need to go back to the future?
 Installing
 **********************
 
-Download the binary and add to your PATH: ``/usr/local/bin/``
+`Download the binary <https://github.com/pjhampton/git-backport/releases>`_ and add to your PATH: ``/usr/local/bin/``
+
 Once this is done refresh your terminal and test with ``git backport``
 
 Unlicense-d
