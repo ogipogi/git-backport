@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const Version = "0.0.9"
+const Version = "0.0.10"
 
 type BackportOperation struct {
 	hash     string
@@ -33,14 +33,16 @@ func main() {
 	branches := GetBranches()
 	parsedBranches := ParseBranches(branches)
 	CheckIfBranchesExist(backportInfo.branches, parsedBranches)
+
+	Backport(backportInfo.hash, parsedBranches)
 }
 
 func PrintManual() {
-	fmt.Printf("\ngit backport :: v%s\n\n", Version)
+	fmt.Printf("\ngit Backport :: v%s\n\n", Version)
 
 	fmt.Printf("HOW TO >>>>>\n")
-	fmt.Println("$ git backport commit_hash:branch_name")
-	fmt.Println("$ git backport commit_hash:branch_name1,branch_name2,branch_name3")
+	fmt.Println("$ git Backport commit_hash:branch_name")
+	fmt.Println("$ git Backport commit_hash:branch_name1,branch_name2,branch_name3")
 	fmt.Printf("<<<<<\n\n")
 }
 
@@ -70,6 +72,23 @@ func GetBranches() []string {
 	return strings.Split(strings.TrimSpace(string(cmdOut)), "\n")
 }
 
+func Backport(commitHash string, branches []string) {
+
+	cmdOp := "git"
+
+	for _, branch := range branches {
+		fmt.Println(branch)
+		checkoutArgs := []string{"checkout ", branch}
+		exec.Command(cmdOp, checkoutArgs...).Run()
+
+		cherryPickArgs := []string{"cherry-pick ", commitHash}
+		if _, err := exec.Command(cmdOp, cherryPickArgs...).Output(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
+}
+
 func ParseBranches(branches []string) []string {
 	var gitBranches []string
 
@@ -94,7 +113,6 @@ func BranchInBranchesSlice(a string, list []string) bool {
 func CheckIfBranchesExist(branches []string, gitBranches []string) {
 	for _, branch := range branches {
 		exists := BranchInBranchesSlice(strings.TrimSpace(branch), gitBranches)
-		fmt.Println(branch, exists)
 		if !exists {
 			fmt.Fprintln(os.Stderr, "Error: could not find branch with name", branch)
 			PrintManual()
