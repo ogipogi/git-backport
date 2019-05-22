@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const Version = "0.0.10"
+const Version = "0.0.12"
 
 type BackportOperation struct {
 	hash     string
@@ -31,10 +31,13 @@ func main() {
 	}
 
 	branches := GetBranches()
+
+	// check if the branch actually exists
 	parsedBranches := ParseBranches(branches)
 	CheckIfBranchesExist(backportInfo.branches, parsedBranches)
 
-	Backport(backportInfo.hash, parsedBranches)
+	// if all ok, then backport
+	Backport(backportInfo.hash, backportInfo.branches)
 }
 
 func PrintManual() {
@@ -77,15 +80,18 @@ func Backport(commitHash string, branches []string) {
 	cmdOp := "git"
 
 	for _, branch := range branches {
-		fmt.Println(branch)
-		checkoutArgs := []string{"checkout ", branch}
-		exec.Command(cmdOp, checkoutArgs...).Run()
+		checkoutArgs := []string{"checkout", branch}
 
-		cherryPickArgs := []string{"cherry-pick ", commitHash}
-		if _, err := exec.Command(cmdOp, cherryPickArgs...).Output(); err != nil {
+		if _, err := exec.Command(cmdOp, checkoutArgs...).Output(); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+
+		//cherryPickArgs := []string{"cherry-pick ", commitHash}
+		//if _, err := exec.Command(cmdOp, cherryPickArgs...).Output(); err != nil {
+		//	fmt.Fprintln(os.Stderr, err)
+		//	os.Exit(1)
+		//}
 	}
 }
 
