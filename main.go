@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const Version = "0.0.12"
+const Version = "0.0.13"
 
 type BackportOperation struct {
 	hash     string
@@ -87,11 +87,11 @@ func Backport(commitHash string, branches []string) {
 			os.Exit(1)
 		}
 
-		//cherryPickArgs := []string{"cherry-pick ", commitHash}
-		//if _, err := exec.Command(cmdOp, cherryPickArgs...).Output(); err != nil {
-		//	fmt.Fprintln(os.Stderr, err)
-		//	os.Exit(1)
-		//}
+		cherryPickArgs := []string{"cherry-pick", commitHash}
+		if _, err := exec.Command(cmdOp, cherryPickArgs...).Output(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
 	}
 }
 
