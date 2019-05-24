@@ -24,6 +24,11 @@ Example:
 
 ``$ git backport c972b462d82aa69ee6876fae7d865b9b58e26abe:version_1,version_2,version_3``
 
+Contributing
+**********************
+
+Feel free to contribute code - please make sure it's adequately tested.
+
 Unlicense-d
 **********************
 
