@@ -28,3 +28,29 @@ func TestBranchParserWithThreeBranches(t *testing.T) {
 		t.Errorf("Should have been 3 branch, got: %d", len(op.branches))
 	}
 }
+
+func TestBranchInListOfBranches(t *testing.T) {
+	targetBranch := "branch2"
+	branches := []string{"branch1", "branch2", "branch2"}
+	op := BranchInBranchesSlice(targetBranch, branches)
+
+	if op != true {
+		t.Errorf("Branch should have been found in the list of branches")
+	}
+}
+
+func TestBranchNotInListOfBranches(t *testing.T) {
+	targetBranch := "branch4"
+	branches := []string{"branch1", "branch2", "branch2"}
+	op := BranchInBranchesSlice(targetBranch, branches)
+
+	if op == true {
+		t.Errorf("Branch should have not been found in the list of branches")
+	}
+}
+
+func TestThatChecksIfGitBranchExists(t *testing.T) {
+	targetBranches := []string{"branch1", "branch2"}
+	gitBranches := []string{"branch1", "branch2", "branch2", "surpriseBranch"}
+	CheckIfBranchesExist(targetBranches, gitBranches)
+}
