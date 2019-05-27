@@ -1,11 +1,15 @@
 #!/usr/bin/env bats
 
-@test "addition using bc" {
-  result="$(echo 2+2 | bc)"
-  [ "$result" -eq 4 ]
-}
+@test "when no args are supplied the usage manual is printed" {
+  result="$(git backport)"
+  [ "$result" -eq "
 
-@test "addition using dc" {
-  result="$(echo 2 2+p | dc)"
-  [ "$result" -eq 4 ]
+    git Backport :: v0.0.14
+
+    HOW TO >>>>>
+    $ git Backport commit_hash:branch_name
+    $ git Backport commit_hash:branch_name1,branch_name2,branch_name3
+    <<<<<
+
+  "]
 }

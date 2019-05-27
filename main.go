@@ -19,7 +19,7 @@ func main() {
 
 	if len(args) < 2 {
 		PrintManual()
-		return
+		os.Exit(0)
 	}
 
 	backportInfo := GetHashAndBranches(args[1])
