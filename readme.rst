@@ -7,8 +7,6 @@ git backport
 .. |Website goreportcard.com| image:: https://goreportcard.com/badge/github.com/pjhampton/git-backport
    :target: https://goreportcard.com/report/github.com/pjhampton/git-backport
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/pjhampton/git-backport)](https://goreportcard.com/report/github.com/pjhampton/git-backport)
-
 Need to go back to the future?
 
 ``git backport`` is a git plugin that will help backport commits in time to other release branches.
