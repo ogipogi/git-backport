@@ -6,6 +6,9 @@ git backport
 
 .. |Website goreportcard.com| image:: https://goreportcard.com/badge/github.com/pjhampton/git-backport
    :target: https://goreportcard.com/report/github.com/pjhampton/git-backport
+   
+.. image:: https://circleci.com/gh/pjhampton/git-backport.svg?style=svg
+    :target: https://circleci.com/gh/pjhampton/git-backport
 
 Need to go back to the future?
 
