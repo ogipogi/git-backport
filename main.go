@@ -25,7 +25,7 @@ func main() {
 	backportInfo := GetHashAndBranches(args[1])
 
 	if len(backportInfo.branches) < 1 {
-		fmt.Errorf("no git branches specified\n")
+		fmt.Printf(fmt.Errorf("no git branches specified\n"))
 		PrintManual()
 		return
 	}
