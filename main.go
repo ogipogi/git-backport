@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-const Version = "0.0.14"
+const version = "0.0.15"
 
-type BackportOperation struct {
+type backportOperation struct {
 	hash     string
 	branches []string
 }
@@ -41,7 +41,7 @@ func main() {
 }
 
 func PrintManual() {
-	fmt.Printf("\ngit Backport :: v%s\n\n", Version)
+	fmt.Printf("\ngit Backport :: v%s\n\n", version)
 
 	fmt.Printf("HOW TO >>>>>\n")
 	fmt.Println("$ git Backport commit_hash:branch_name")
@@ -49,12 +49,12 @@ func PrintManual() {
 	fmt.Printf("<<<<<\n\n")
 }
 
-func GetHashAndBranches(input string) BackportOperation {
+func GetHashAndBranches(input string) backportOperation {
 	command := strings.Split(input, ":")
 	hash := command[0]
 	branches := strings.Split(command[1], ",")
 
-	return BackportOperation{hash, branches}
+	return backportOperation{hash, branches}
 }
 
 func GetBranches() []string {
